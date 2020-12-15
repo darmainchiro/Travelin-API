@@ -1,3 +1,56 @@
+# Travelin
+
+## How to Run
+
+1 Setup env file
+
+```
+cp .env.example .env
+
+vi .env
+APP_KEY=
+
+DB_CONNECTION=
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+DB_ROOT_PASS=
+
+PROJECT_NAME=happy-futsal-api
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+VERSION=latest
+```
+
+2 Run MySQL Database
+
+```bash
+make run-db
+```
+
+3 Build Application Environment
+
+```bash
+make build-dev
+```
+
+4 Run Migration Database
+
+```bash
+make run-shell-dev
+php composer.phar install
+php artisan migrate
+```
+
+5 Run Application
+
+```bash
+make run-daemon-dev
+```
+
+---
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
