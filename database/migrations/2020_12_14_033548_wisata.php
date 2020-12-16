@@ -18,6 +18,7 @@ class Wisata extends Migration
             $table->unsignedBigInteger('id_category');
             $table->string('name_wisata');
             $table->string('description');
+            $table->string('alamat');
             $table->string('fasilitas');
             $table->string('gambar');
             $table->timestamps();
