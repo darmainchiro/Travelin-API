@@ -1,5 +1,6 @@
 # Configuration setup
-url="http://localhost:8080/"
+#url="http://136.243.47.204:11180"
+url="http://localhost:8080"
 
 # Create travel
 method="POST"
@@ -15,6 +16,7 @@ id=$(echo ${response} | jq -r '.travel.id' 2> /dev/null)
 status=$(echo ${response} | jq -r '.success' 2> /dev/null)
 
 if [ "$status" = "true" ]; then
+    echo $response | jq .
     echo "${url}/travel method=${method} : CREATE TRAVEL SUCCESS"
 else
     echo $response
@@ -29,6 +31,7 @@ response=$(
     | grep HTTP | cut -d ' ' -f 2
     )
 if [ "$response" = "200" ]; then
+    echo $response
     echo "${url}/travels method=${method} : LIST TRAVEL SUCCESS"
 else
     echo $response
@@ -41,8 +44,9 @@ method="GET"
 response=$(
     http -f ${method} ${url}/travel/${id}
     )
-response_id=$(echo ${response} | jq -r '.id' 2> /dev/null)
-if [ "$id" = "$response_id" ]; then
+status=$(echo ${response} | jq -r '.success' 2> /dev/null)
+if [ "$status" = "true" ]; then
+    echo $response | jq .
     echo "${url}/travel/${id} method=${method} : SHOW DETAIL TRAVEL SUCCESS"
 else
     echo $response
@@ -63,6 +67,7 @@ response=$(
 id=$(echo ${response} | jq -r '.travel.id' 2> /dev/null)
 status=$(echo ${response} | jq -r '.success' 2> /dev/null)
 if [ "$status" = "true" ]; then
+    echo $response | jq .
     echo "${url}/travel/${id} method=${method} : UPDATE TRAVEL SUCCESS"
 else
     echo $response
@@ -76,7 +81,8 @@ response=$(
     http -f ${method} ${url}/travel/${id}
     )
 status=$(echo ${response} | jq -r '.success' 2> /dev/null)
-if [ "$id" = "$response_id" ]; then
+if [ "$status" = "true" ]; then
+    echo $response | jq .
     echo "${url}/travel/${id} method=${method} : DELETE TRAVEL SUCCESS"
 else
     echo $response
