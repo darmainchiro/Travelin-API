@@ -46,7 +46,7 @@ run-daemon-dev:
 		${PROJECT_NAME}/${BRANCH}:${VERSION}
 
 make stop-daemon-dev:
-	docker stop ${PROJECT_NAME}/${BRANCH}:${VERSION}
+	docker stop ${PROJECT_NAME}-${BRANCH}-${VERSION}-apps
 
 make restart-daemon-dev: stop-daemon-dev run-daemon-dev
 
