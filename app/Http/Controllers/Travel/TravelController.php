@@ -44,11 +44,13 @@ class TravelController extends Controller
             $id_category = $request->id_category;
             $name_wisata = $request->name_wisata;
             $description = $request->description;
+            $alamat = $request->alamat;
             $fasilitas = $request->fasilitas;
         } else {
             $id_category = $request->id_category;
             $name_wisata = $request->name_wisata;
             $foto = 'default.png';
+            $alamat = $request->alamat;
             $description = $request->description;
             $fasilitas = $request->fasilitas;
         }
@@ -57,6 +59,7 @@ class TravelController extends Controller
             'id_category' => $id_category,
             'name_wisata' => $name_wisata,
             'description' => $description,
+            'alamat' => $alamat,
             'fasilitas' => $fasilitas,
             'gambar' => $foto,
         ]);
