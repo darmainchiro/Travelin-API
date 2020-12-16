@@ -36,5 +36,6 @@ $router->group(['namespace' => 'Travel'], function() use ($router)
     $router->patch('travel/{id}', 'TravelController@update');
     $router->delete('travel/{id}', 'TravelController@destroy');
     $router->get('travel/{id}', 'TravelController@show');
+    $router->get('travel/category/{id_category}', 'TravelController@showByCategory');
     $router->get('travels', 'TravelController@index');
 });
