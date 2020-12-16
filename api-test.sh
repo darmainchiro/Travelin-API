@@ -1,5 +1,5 @@
 # Configuration setup
-url="http://136.243.47.204:11180/"
+url="http://localhost:8080/"
 
 # Create travel
 method="POST"
@@ -7,6 +7,7 @@ response=$(
     http -f ${method} ${url}/travel \
     id_category=1 \
     name_wisata="Villa kahuripan" \
+    alamat="Kemang, Parung" \
     description="Villa kahuripan dingin sejuk" \
     fasilitas="1. Kamar Mandi Dalam\n2. AC\n3. Kolam Renang\n4. Wifi"
     )
@@ -55,6 +56,7 @@ response=$(
     http -f ${method} ${url}/travel/${id} \
     id_category=1 \
     name_wisata="Villa kahuripan" \
+    alamat="Kahuripan, Kemang, Parung" \
     description="Villa kahuripan tidak dingin dan sejuk" \
     fasilitas="1. Kamar Mandi Dalam\n2. AC\n3. Kolam Renang\n4. Wifi"
     )
