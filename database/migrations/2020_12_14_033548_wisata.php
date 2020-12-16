@@ -19,6 +19,7 @@ class Wisata extends Migration
             $table->string('name_wisata');
             $table->string('alamat');
             $table->string('description');
+            $table->string('alamat');
             $table->string('fasilitas');
             $table->string('gambar');
             $table->timestamps();

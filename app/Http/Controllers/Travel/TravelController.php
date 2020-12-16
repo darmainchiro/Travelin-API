@@ -112,6 +112,21 @@ class TravelController extends Controller
 
     }
 
+    public function showByCategory($id_category)
+    {
+
+        $travel = Travel::where("wisata.id_category",$id_category)
+            ->join('category','wisata.id_category','=','category.id')
+            ->select('wisata.*','category.category')
+            ->get();
+        foreach ($travel as $object){
+            $object->gambar = url('upload_foto'.'/'.$object->gambar);
+        }
+        
+        return $travel;
+         
+    }
+
     /**
      * Update the specified resource in storage.
      *
