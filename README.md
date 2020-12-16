@@ -49,6 +49,12 @@ php artisan migrate
 make run-daemon-dev
 ```
 
+6 Run testing
+
+```bash
+bash api-test.sh
+```
+
 ---
 
 # Lumen PHP Framework
