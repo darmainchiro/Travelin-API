@@ -1,5 +1,5 @@
 # Configuration setup
-url="localhost:8080"
+url="http://136.243.47.204:11180/"
 
 # Create travel
 method="POST"
@@ -16,6 +16,7 @@ status=$(echo ${response} | jq -r '.success' 2> /dev/null)
 if [ "$status" = "true" ]; then
     echo "${url}/travel method=${method} : CREATE TRAVEL SUCCESS"
 else
+    echo $response
     echo "ERROR:$? => ${url}/travel method=${method} : CREATE TRAVEL FAILED"
     exit $?
 fi
@@ -29,6 +30,7 @@ response=$(
 if [ "$response" = "200" ]; then
     echo "${url}/travels method=${method} : LIST TRAVEL SUCCESS"
 else
+    echo $response
     echo "ERROR:$? => ${url}/travels method=${method} : LIST TRAVEL FAILED"
     exit $?
 fi
@@ -42,6 +44,7 @@ response_id=$(echo ${response} | jq -r '.id' 2> /dev/null)
 if [ "$id" = "$response_id" ]; then
     echo "${url}/travel/${id} method=${method} : SHOW DETAIL TRAVEL SUCCESS"
 else
+    echo $response
     echo "ERROR:$? => ${url}/travel/${id} method=${method} : SHOW DETAIL TRAVEL FAILED"
     exit $?
 fi
@@ -58,9 +61,10 @@ response=$(
 id=$(echo ${response} | jq -r '.travel.id' 2> /dev/null)
 status=$(echo ${response} | jq -r '.success' 2> /dev/null)
 if [ "$status" = "true" ]; then
-    echo "${url}/travel method=${method} : UPDATE TRAVEL SUCCESS"
+    echo "${url}/travel/${id} method=${method} : UPDATE TRAVEL SUCCESS"
 else
-    echo "ERROR:$? => ${url}/travel method=${method} : UPDATE TRAVEL FAILED"
+    echo $response
+    echo "ERROR:$? => ${url}/travel/${id} method=${method} : UPDATE TRAVEL FAILED"
     exit $?
 fi
 
@@ -73,6 +77,7 @@ status=$(echo ${response} | jq -r '.success' 2> /dev/null)
 if [ "$id" = "$response_id" ]; then
     echo "${url}/travel/${id} method=${method} : DELETE TRAVEL SUCCESS"
 else
+    echo $response
     echo "ERROR:$? => ${url}/travel/${id} method=${method} : DELETE TRAVEL FAILED"
     exit $?
 fi
