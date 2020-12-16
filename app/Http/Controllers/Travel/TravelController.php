@@ -44,11 +44,13 @@ class TravelController extends Controller
             $id_category = $request->id_category;
             $name_wisata = $request->name_wisata;
             $description = $request->description;
+            $alamat = $request->alamat;
             $fasilitas = $request->fasilitas;
         } else {
             $id_category = $request->id_category;
             $name_wisata = $request->name_wisata;
             $foto = 'default.png';
+            $alamat = $request->alamat;
             $description = $request->description;
             $fasilitas = $request->fasilitas;
         }
@@ -57,6 +59,7 @@ class TravelController extends Controller
             'id_category' => $id_category,
             'name_wisata' => $name_wisata,
             'description' => $description,
+            'alamat' => $alamat,
             'fasilitas' => $fasilitas,
             'gambar' => $foto,
         ]);
@@ -87,9 +90,26 @@ class TravelController extends Controller
     public function show($id)
     {
 
-        $travel = Travel::find($id);
+        $travel = Travel::where("wisata.id",$id)
+            ->join('category','wisata.id_category','=','category.id')
+            ->select('wisata.*','category.category')
+            ->first();
         $travel['gambar'] = url('upload_foto'.'/'.$travel['gambar']);
-        return $travel;
+        
+        if($travel){
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil show travel',
+                'travel' => $travel
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak bisa show travel',
+                'travel' => ''
+            ], 404);
+        }
+
     }
 
     /**

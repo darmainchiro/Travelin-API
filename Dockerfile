@@ -3,7 +3,7 @@ FROM php:7.3-fpm
 WORKDIR /apps
 
 RUN apt update \
-&& apt install zip unzip wget
+&& apt install -y zip unzip wget
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
