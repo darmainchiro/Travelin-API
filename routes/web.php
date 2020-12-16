@@ -27,3 +27,14 @@ $router->get('/key', function() {
 $router->post('register', 'Auth\RegisterController');
 $router->post('login', 'Auth\LoginController');
 $router->get('/user/{id}', 'User\UserController@show');
+
+//Wisata
+$router->group(['namespace' => 'Travel'], function() use ($router)
+{
+    // Using The "App\Http\Controllers\Lapangan" Namespace...
+    $router->post('travel', 'TravelController@store');
+    $router->patch('travel/{id}', 'TravelController@update');
+    $router->delete('travel/{id}', 'TravelController@destroy');
+    $router->get('travel/{id}', 'TravelController@show');
+    $router->get('travels', 'TravelController@index');
+});
