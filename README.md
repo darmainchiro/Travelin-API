@@ -18,8 +18,8 @@ DB_USERNAME=
 DB_PASSWORD=
 DB_ROOT_PASS=
 
-PROJECT_NAME=happy-futsal-api
-BRANCH=`git rev-parse --abbrev-ref HEAD`
+PROJECT_NAME=travelin
+BRANCH=<edit-your-branch-here>
 VERSION=latest
 ```
 
