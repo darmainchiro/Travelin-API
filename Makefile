@@ -17,6 +17,12 @@ run-db:
 		-e MYSQL_PASSWORD=${DB_PASSWORD} \
 		-d mariadb:10.2-bionic
 
+run-phpmyadmin:
+	docker run --name ${PROJECT_NAME}-${BRANCH}-${VERSION}-phpmyadmin \
+	-d --link ${PROJECT_NAME}-${BRANCH}-${VERSION}-db:db \
+	-p 8080:80 \
+	 phpmyadmin
+
 build-dev:
 	docker build -t ${PROJECT_NAME}/${BRANCH}:${VERSION} .
 
@@ -38,6 +44,11 @@ run-daemon-dev:
 		--link ${PROJECT_NAME}-${BRANCH}-${VERSION}-db:dbhost \
 		-v ${PWD}/:/apps/ \
 		${PROJECT_NAME}/${BRANCH}:${VERSION}
+
+make stop-daemon-dev:
+	docker stop ${PROJECT_NAME}/${BRANCH}:${VERSION}
+
+make restart-daemon-dev: stop-daemon-dev run-daemon-dev
 
 run-shell-dev:
 	docker run --name ${PROJECT_NAME}-${BRANCH}-${VERSION}-apps \
