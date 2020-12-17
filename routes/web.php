@@ -39,3 +39,7 @@ $router->group(['namespace' => 'Travel'], function() use ($router)
     $router->get('travel/category/{id_category}', 'TravelController@showByCategory');
     $router->get('travels', 'TravelController@index');
 });
+
+//Category
+$router->get('category', 'Category\CategoryController@index');
+
