@@ -43,3 +43,11 @@ $router->group(['namespace' => 'Travel'], function() use ($router)
 //Category
 $router->get('category', 'Category\CategoryController@index');
 
+//Wisata
+$router->group(['namespace' => 'Review'], function() use ($router)
+{
+    // Using The "App\Http\Controllers\Lapangan" Namespace...
+    $router->post('review', 'ReviewController@store');
+    $router->get('review/{id}', 'ReviewController@show');
+    $router->get('review', 'ReviewController@index');
+});

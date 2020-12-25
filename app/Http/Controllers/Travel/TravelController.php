@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Models\Travel;
+use App\Models\Review;
 
 class TravelController extends Controller
 {
@@ -14,7 +15,10 @@ class TravelController extends Controller
      */
     public function index()
     {
-        $travel = Travel::all();
+        $travel = Travel::join('category','wisata.id_category','=','category.id')
+            ->select('wisata.*','category.category')
+            ->get();
+        
         foreach ($travel as $object){
             $object->gambar = url('upload_foto'.'/'.$object->gambar);
         }
